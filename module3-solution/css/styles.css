@@ -8,7 +8,7 @@ h2.text-center {
   margin: 20px 0 12px;
 }
 
-/* Mobile dropdown full-width with visible separators */
+/* ===== NAVBAR ===== */
 #mobile-nav {
   background: #f7f7f7;
 }
@@ -23,40 +23,93 @@ h2.text-center {
   border-top: 0;
 }
 
-/* Sections */
+/* Bold text */
+.nav-bold > li > a {
+  font-weight: bold;
+}
+.title-bold {
+  font-weight: bold;
+}
+
+/* ===== GRID SPACING & EQUAL HEIGHT ===== */
+/* Chuẩn hóa gutter: dùng âm margin ở .row + padding ở cột */
+.menu-row {
+  margin-left: -15px;
+  margin-right: -15px;
+}
+.menu-row > [class*="col-"] {
+  padding-left: 15px;
+  padding-right: 15px;
+  display: flex; /* để con (card) có thể stretch */
+}
+
+/* Equal-height cho sm/md bằng flex */
+@media (min-width: 768px) {
+  .menu-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch; /* tất cả cột cao bằng nhau */
+  }
+  .menu-section {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto; /* card tự lấp đầy chiều cao cột */
+    height: auto; /* bỏ height cũ nếu có */
+  }
+}
+
+/* Phao an toàn: nếu nội dung lệch, vẫn đảm bảo nền cao đều */
+@media (min-width: 992px) {
+  .menu-section {
+    min-height: 520px;
+  }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+  .menu-section {
+    min-height: 520px;
+  }
+}
+
+/* ===== CARD STYLE ===== */
 .menu-section {
   border: 1px solid #d9e6ff;
+  border-radius: 10px;
   padding: 20px;
-  margin-bottom: 24px;
-  background: #f1f8ff; /* default, overridden below */
+  margin-bottom: 28px;
+  background: #f1f8ff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
 }
 .menu-section h3 {
   margin-top: 0;
   margin-bottom: 16px;
 }
+.menu-section p {
+  margin-bottom: 10px;
+}
 .menu-section .back {
-  margin-top: 20px;
+  margin-top: auto; /* đẩy link xuống đáy để các card nhìn bằng nhau */
   text-align: right;
 }
 .menu-section .back a {
   text-decoration: none;
+  font-weight: bold;
 }
 .menu-section .back a:hover {
   text-decoration: underline;
 }
 
-/* Pastel backgrounds by dish (harmonized with images) */
+/* ===== PASTEL BACKGROUNDS ===== */
 .menu--chicken {
   background: #fff3e0;
-} /* warm light yellow */
+}
 .menu--beef {
   background: #ffe0e0;
-} /* soft wine red */
+}
 .menu--sushi {
   background: #e0f7f5;
-} /* fresh pastel teal */
+}
 
-/* ======= Image card with gradient overlay & hover ======= */
+/* ===== IMAGE CARD ===== */
 .menu-media {
   position: relative;
   overflow: hidden;
@@ -69,9 +122,7 @@ h2.text-center {
   width: 100%;
   height: auto;
   transition: transform 0.4s ease;
-  will-change: transform;
 }
-/* default overlay; specific tints override below */
 .menu-media::after {
   content: "";
   position: absolute;
@@ -85,18 +136,15 @@ h2.text-center {
     rgba(0, 0, 0, 0.25) 100%
   );
 }
-/* Hover only on devices that support hover */
 @media (hover: hover) and (pointer: fine) {
-  .menu-media:hover .menu-img,
-  .menu-media:focus-within .menu-img {
+  .menu-media:hover .menu-img {
     transform: scale(1.05);
   }
-  .menu-media:hover::after,
-  .menu-media:focus-within::after {
+  .menu-media:hover::after {
     opacity: 0.35;
   }
 }
-/* Dish-specific overlay tint */
+/* Overlay tint theo món */
 .menu--chicken .menu-media::after {
   background: linear-gradient(
     180deg,
@@ -119,7 +167,7 @@ h2.text-center {
   );
 }
 
-/* Accessibility: respect reduced motion */
+/* ===== REDUCED MOTION ===== */
 @media (prefers-reduced-motion: reduce) {
   .menu-img,
   .menu-media::after {
