@@ -1,0 +1,124 @@
+/* (14) Consistent sizing + spacing */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; /* (15 optional) */
+  line-height: 1.5;
+  color: #111;
+}
+
+/* Heading (15: +75% vs body ~ 1rem) */
+.page-header {
+  text-align: center;
+  padding: 24px 16px;
+}
+.page-header h1 {
+  font-size: 1.75rem;
+  margin: 0;
+}
+
+/* Shell container (14: horizontal spacing vs window edge) */
+.container {
+  padding: 0 16px;
+  max-width: 1200px; /* optional cap for very wide screens */
+  margin: 0 auto;
+}
+
+/* Clearfix for float grid */
+.row::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* (10–12) Float grid, mobile-first */
+.col {
+  float: left;
+  width: 100%; /* mobile default: full width */
+  padding: 12px; /* gutter between columns & rows */
+  margin-bottom: 12px;
+}
+
+/* (13) Section box and badge positioning */
+.section {
+  position: relative; /* anchor for absolute title badge */
+  border: 1px solid #000; /* (15) black border */
+  background: #f2f6ff; /* default background (overridden below) */
+  min-height: 180px;
+}
+
+/* Title badge always top-right (13) */
+.section__title {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: #ddd;
+  border: 1px solid #000; /* (15) black border on badge */
+  padding: 6px 10px;
+  font-weight: 600;
+  font-size: 1.25rem; /* (15 optional) +25% vs body */
+}
+
+/* Content padding; push down so it doesn't overlap title (14) */
+.section__content {
+  padding: 16px;
+  padding-top: 56px; /* reserve space for the badge */
+}
+
+/* (15) Accessible colors per section */
+#chicken {
+  background: #fdebd2;
+} /* light orange */
+.section__title--chicken {
+  background: #f5c271;
+}
+
+#beef {
+  background: #ffd9df;
+} /* light pink */
+.section__title--beef {
+  background: #f28ea5;
+}
+
+#sushi {
+  background: #dff6f3;
+} /* light teal */
+.section__title--sushi {
+  background: #8ed7cc;
+}
+
+/* ================= Breakpoints ================= */
+
+/* (11) Tablet: 768–991px → 2 cols (50%) + 1 full row */
+@media (min-width: 768px) and (max-width: 991px) {
+  .col--half {
+    width: 50%;
+  }
+  .col--full {
+    width: 100%;
+  }
+}
+
+/* (10) Desktop: ≥ 992px → 3 columns equally (33.333%) */
+@media (min-width: 992px) {
+  .col--third {
+    width: 33.3333%;
+  }
+}
+
+/* (12) Mobile ≤767px already handled by base width:100% */
+
+.section__title {
+  top: 0;
+  right: 0;
+}
+.section__content {
+  padding-top: 72px;
+} /* chừa chỗ cho badge lớn hơn */
