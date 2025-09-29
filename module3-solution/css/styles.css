@@ -1,0 +1,128 @@
+/* Basic */
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+h2.text-center {
+  margin: 20px 0 12px;
+}
+
+/* Mobile dropdown full-width with visible separators */
+#mobile-nav {
+  background: #f7f7f7;
+}
+#mobile-nav .navbar-nav {
+  margin: 0;
+}
+.mobile-menu > li > a {
+  padding: 12px 16px;
+  border-top: 1px solid #e5e5e5;
+}
+.mobile-menu > li:first-child > a {
+  border-top: 0;
+}
+
+/* Sections */
+.menu-section {
+  border: 1px solid #d9e6ff;
+  padding: 20px;
+  margin-bottom: 24px;
+  background: #f1f8ff; /* default, overridden below */
+}
+.menu-section h3 {
+  margin-top: 0;
+  margin-bottom: 16px;
+}
+.menu-section .back {
+  margin-top: 20px;
+  text-align: right;
+}
+.menu-section .back a {
+  text-decoration: none;
+}
+.menu-section .back a:hover {
+  text-decoration: underline;
+}
+
+/* Pastel backgrounds by dish (harmonized with images) */
+.menu--chicken {
+  background: #fff3e0;
+} /* warm light yellow */
+.menu--beef {
+  background: #ffe0e0;
+} /* soft wine red */
+.menu--sushi {
+  background: #e0f7f5;
+} /* fresh pastel teal */
+
+/* ======= Image card with gradient overlay & hover ======= */
+.menu-media {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  margin: 0 0 16px;
+}
+.menu-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: transform 0.4s ease;
+  will-change: transform;
+}
+/* default overlay; specific tints override below */
+.menu-media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0) 35%,
+    rgba(0, 0, 0, 0.25) 100%
+  );
+}
+/* Hover only on devices that support hover */
+@media (hover: hover) and (pointer: fine) {
+  .menu-media:hover .menu-img,
+  .menu-media:focus-within .menu-img {
+    transform: scale(1.05);
+  }
+  .menu-media:hover::after,
+  .menu-media:focus-within::after {
+    opacity: 0.35;
+  }
+}
+/* Dish-specific overlay tint */
+.menu--chicken .menu-media::after {
+  background: linear-gradient(
+    180deg,
+    rgba(95, 56, 0, 0) 35%,
+    rgba(133, 86, 16, 0.35) 100%
+  );
+}
+.menu--beef .menu-media::after {
+  background: linear-gradient(
+    180deg,
+    rgba(120, 0, 0, 0) 35%,
+    rgba(156, 32, 32, 0.35) 100%
+  );
+}
+.menu--sushi .menu-media::after {
+  background: linear-gradient(
+    180deg,
+    rgba(0, 70, 60, 0) 35%,
+    rgba(0, 120, 110, 0.3) 100%
+  );
+}
+
+/* Accessibility: respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .menu-img,
+  .menu-media::after {
+    transition: none !important;
+  }
+}
